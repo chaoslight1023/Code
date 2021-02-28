@@ -7,4 +7,5 @@ for i in range (1,6):
         print('登录失败，你还有%d次机会'%(5-i))
 else:
     print('失败次数过多，无法登入')
-page=input('你要干什么\n对话请输入1\n请输入：')
+if i<5:
+    page=input('你要干什么\n对话请输入1\n请输入：')
