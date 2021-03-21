@@ -4,7 +4,8 @@ int main()
 {
 	int score;
 	begin:
-	cout << "(评分仅限于1-10）" << "\n请评分：";
+	cout << "(评分仅限于1-10）"<<"\n退出请输入0"  << "\n请评分：";
+	
 	cin >> score;
 	if (score>0)
 	{
@@ -25,6 +26,10 @@ int main()
 			cout << "请重新输入" << endl;
 			goto begin;
 		}
+	}
+	else if(score==0)
+	{
+		exit(0);
 	}
 	else
 	{
