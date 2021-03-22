@@ -31,4 +31,6 @@ int main()
 	{
 		cout << arr[i] << ",";
 	}
+	system("pause");
+	return 0; 
 }
