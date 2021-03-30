@@ -16,6 +16,7 @@ struct addressbooks//创建通讯录结构体
 	int m_size;
 };
 void addperson(addressbooks* abs);//声明添加联系人函数
+void showperson(addressbooks* abs);//声明显示联系人函数
 int main()
 {
 	addressbooks abs;
@@ -32,6 +33,7 @@ int main()
 			addperson(&abs);
 			break;
 		case 2://2.显示联系人
+			showperson(&abs);
 			break;
 		case 3://3.删除联系人
 			break;
@@ -136,3 +138,24 @@ void showmenu()//定义菜单功能函数
 		system("cls");
 	}
 }
+ void showperson(addressbooks *abs)
+ {
+	 if (abs->m_size == 0)//如果联系人为0，显示记录为空
+	 {
+		 cout << "记录为空" << endl;
+	 }
+	 else
+	 {
+		 for (int i = 0; i < abs->m_size; i++)
+		 {
+			 cout << "姓名:" << abs->arr[i].m_name << "\t";
+			 cout << "性别:" << (abs->arr[i].m_age == 1 ? "男" : "女") << "\t";
+			 cout << " 年龄:" << abs->arr[i].m_age << "\t";
+			 cout << " 电话:" << abs->arr[i].m_phone << "\t";
+			 cout << " 住址:" << abs->arr[i].m_addr << "\t";
+			 cout << endl;
+		 }
+	 }
+	 system("pause");
+	 system("cls"); 
+ }
