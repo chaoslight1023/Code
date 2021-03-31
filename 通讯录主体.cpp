@@ -17,6 +17,8 @@ struct addressbooks//创建通讯录结构体
 };
 void addperson(addressbooks* abs);//声明添加联系人函数
 void showperson(addressbooks* abs);//声明显示联系人函数
+int isexist(addressbooks* abs, string name);//声明检测联系人是否存在的函数,参数1:通讯录，参数2;对比姓名
+void deleteperson(addressbooks* abs);//声明删除联系人函数
 int main()
 {
 	addressbooks abs;
@@ -36,7 +38,21 @@ int main()
 			showperson(&abs);
 			break;
 		case 3://3.删除联系人
+		{
+			deleteperson(&abs);
+			//cout << "请输入要删除的联系人的姓名:";
+			//string name;
+			//cin >> name;
+			//if (isexist(&abs, name) == -1)
+			//{
+			//	cout << "查无此人" << endl;
+			//}
+			//else
+			//{
+			//	cout<<"找到此人"<<endl;
+			//}
 			break;
+		}
 		case 4://4.查找联系人
 			break;
 		case 5://5.修改联系人
@@ -148,14 +164,52 @@ void showmenu()//定义菜单功能函数
 	 {
 		 for (int i = 0; i < abs->m_size; i++)
 		 {
-			 cout << "姓名:" << abs->arr[i].m_name << "\t";
-			 cout << "性别:" << (abs->arr[i].m_age == 1 ? "男" : "女") << "\t";
-			 cout << " 年龄:" << abs->arr[i].m_age << "\t";
-			 cout << " 电话:" << abs->arr[i].m_phone << "\t";
-			 cout << " 住址:" << abs->arr[i].m_addr << "\t";
+			 cout <<"姓名:" << abs->arr[i].m_name << "\t";
+			 cout << "性别:" << (abs->arr[i].m_sex == 1 ? "男" : "女") << "\t";//三目运算符判断
+			 cout << "年龄:" << abs->arr[i].m_age << "\t";
+			 cout << "电话:" << abs->arr[i].m_phone << "\t";
+			 cout << "住址:" << abs->arr[i].m_addr << "\t";
 			 cout << endl;
 		 }
 	 }
 	 system("pause");
 	 system("cls"); 
+ }
+ int isexist(addressbooks* abs, string name)//定义检测联系人是否存在的函数
+ {
+	 for (int i = 0; i < abs->m_size; i++)
+	 {
+		 if (abs->arr[i].m_name == name)//找到用户姓名，返回i
+		 {
+			 return i;
+		 }
+	 }
+	 return -1;//未找到用户姓名返回-1
+ }
+ void deleteperson(addressbooks* abs)
+ {
+	 cout << "请输入要删除的联系人姓名:";
+	 string name;
+	 cin >> name;
+	 cout << endl;
+	 int ret = isexist(abs, name);
+	 if(ret!=-1)//如果ret不等于-1，删除联系人
+	 {
+		 for (int i = ret; i < abs->m_size; i++)
+		 {
+			 if (abs->m_size==1)continue;
+			 else
+			 {
+				 abs->arr[i] = abs->arr[i + 1];//数据前移
+			 } 
+		 }
+		 abs->m_size--;
+		 cout << "删除成功" << endl;
+	 }
+	 else//如果ret=-1,输出查无此人
+	 {
+		 cout << "查无此人" << endl;
+	 }
+	 system("pause");
+	 system("cls");
  }
