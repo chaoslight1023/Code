@@ -19,6 +19,7 @@ void addperson(addressbooks* abs);//声明添加联系人函数
 void showperson(addressbooks* abs);//声明显示联系人函数
 int isexist(addressbooks* abs, string name);//声明检测联系人是否存在的函数,参数1:通讯录，参数2;对比姓名
 void deleteperson(addressbooks* abs);//声明删除联系人函数
+void findperson(addressbooks* abs);//声明查找联系人函数
 int main()
 {
 	addressbooks abs;
@@ -32,14 +33,14 @@ int main()
 		switch (select)
 		{
 		case 1://1.添加联系人
-			addperson(&abs);
+			addperson(&abs);//调用添加联系人函数
 			break;
 		case 2://2.显示联系人
-			showperson(&abs);
+			showperson(&abs);//调用显示联系人函数
 			break;
 		case 3://3.删除联系人
 		{
-			deleteperson(&abs);
+			deleteperson(&abs);//调用删除联系人函数
 			//cout << "请输入要删除的联系人的姓名:";
 			//string name;
 			//cin >> name;
@@ -50,10 +51,11 @@ int main()
 			//else
 			//{
 			//	cout<<"找到此人"<<endl;
-			//}
+			//}测试删除联系人函数
 			break;
 		}
 		case 4://4.查找联系人
+			findperson(&abs);//调用查找联系人函数
 			break;
 		case 5://5.修改联系人
 			break;
@@ -209,6 +211,29 @@ void showmenu()//定义菜单功能函数
 	 else//如果ret=-1,输出查无此人
 	 {
 		 cout << "查无此人" << endl;
+	 }
+	 system("pause");
+	 system("cls");
+ }
+ void findperson(addressbooks* abs)//定义查找联系人函数
+ {
+	 cout << "请输入你要查找的联系人姓名:";
+	 string name;
+	 cin >> name;
+	 cout << endl;
+	 int ret = isexist(abs, name);
+	 if (ret != -1)//找到联系人
+	 {
+		 cout << "姓名:" << abs->arr[ret].m_name << "\t";
+		 cout << "性别:" << (abs->arr[ret].m_sex == 1 ? "男" : "女") << "\t";//三目运算符判断
+		 cout << "年龄:" << abs->arr[ret].m_age << "\t";
+		 cout << "电话:" << abs->arr[ret].m_phone << "\t";
+		 cout << "住址:" << abs->arr[ret].m_addr << "\t";
+		 cout << endl;
+	 }
+	 else
+	 {
+		 cout << "查无此人!" << endl;
 	 }
 	 system("pause");
 	 system("cls");
