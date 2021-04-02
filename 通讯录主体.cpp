@@ -20,6 +20,8 @@ void showperson(addressbooks* abs);//声明显示联系人函数
 int isexist(addressbooks* abs, string name);//声明检测联系人是否存在的函数,参数1:通讯录，参数2;对比姓名
 void deleteperson(addressbooks* abs);//声明删除联系人函数
 void findperson(addressbooks* abs);//声明查找联系人函数
+void modifyperson(addressbooks* abs);//声明修改联系人函数
+void cleanperson(addressbooks* abs);//声明清空联系人的函数
 int main()
 {
 	addressbooks abs;
@@ -58,8 +60,10 @@ int main()
 			findperson(&abs);//调用查找联系人函数
 			break;
 		case 5://5.修改联系人
+			modifyperson(&abs);//调用修改联系人函数
 			break;
 		case 6://6.清空联系人
+			cleanperson(&abs);//调用清空联系人的函数
 			break;
 		case 0://0.退出通讯录
 			cout << "欢迎下次使用" << endl;
@@ -235,6 +239,82 @@ void showmenu()//定义菜单功能函数
 	 {
 		 cout << "查无此人!" << endl;
 	 }
+	 system("pause");
+	 system("cls");
+ }
+ void modifyperson(addressbooks* abs)//定义修改联系人函数
+ {
+	 cout << "请输入你要修改的联系人:";
+	 string name;
+	 cin >> name;
+	 cout << endl;
+	 int ret = isexist(abs, name);
+	 if (ret != 1)//找到联系人
+	 {
+		 cout << "找到联系人" << endl;
+		 //姓名
+		 string name;
+		 cout << "请修改姓名:";
+		 cin >> name;
+		 cout << "\n";
+		 abs->arr[ret].m_name = name;
+		 //性别
+		 cout << "请修改性别:" << endl;
+		 cout << "1---男 2---女" << endl;
+		 int sex = 0;
+		 while (1)
+		 {
+			 cin >> sex;
+			 if (sex == 1 || sex == 2)//如果输出正确，退出
+			 {
+				 abs->arr[ret].m_sex = sex;
+				 break;
+			 }
+			 else//如果输出不正确，重新输入
+			 {
+				 cout << "无法识别,请重新输入" << endl;
+			 }
+
+		 }
+		 //年龄
+		 while (1)
+		 {
+			 cout << "请修改年龄:";
+			 int age;
+			 cin >> age;
+			 if (age < 0 || age>150)
+			 {
+				 cout << "请修改输入" << endl;
+			 }
+			 else
+			 {
+				 abs->arr[ret].m_age = age;
+				 break;
+			 }
+		 }
+
+		 //电话
+		 cout << "请修改电话:";
+		 string phone;
+		 cin >> phone;
+		 abs->arr[ret].m_phone = phone;
+		 //住址
+		 cout << "请修改地址:";
+		 string addr;
+		 cin >> addr;
+		 abs->arr[ret].m_addr = addr;
+	 }
+	 else
+	 {
+		 cout << "查无此人" << endl;
+	 }
+	 system("pause");
+	 system("cls");
+ }
+ void cleanperson(addressbooks* abs)//定义清空联系人的函数
+ {
+	 abs->m_size = 0;
+	 cout << "通讯录已清空" << endl;
 	 system("pause");
 	 system("cls");
  }
